@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>Smart OPUS Transcriber</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">SCRIPT­FLOW PRO • LOCAL TOOL</p>
+        <h1>Smart OPUS Transcriber</h1>
+        <p class="subtitle">Convert supported audio into clean text without Gemini, Puter, Hugging Face, FastAPI, or API keys.</p>
+      </div>
+      <span class="status-pill" id="engineStatus">Checking browser…</span>
+    </header>
+
+    <section class="card">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose an audio file">
+        <input id="fileInput" type="file" accept=".opus,.ogg,.webm,audio/opus,audio/ogg,audio/webm,audio/*" hidden>
+        <div class="drop-icon">♪</div>
+        <h2>Drop an audio file here</h2>
+        <p>or choose an OPUS, OGG, WebM, WAV, MP3, or M4A file</p>
+        <button class="primary" id="chooseBtn" type="button">Choose file</button>
+        <p class="hint">No upload to your ScriptFlow server is performed by this app.</p>
+      </div>
+
+      <div class="file-row hidden" id="fileRow">
+        <div>
+          <strong id="fileName"></strong>
+          <span id="fileMeta"></span>
+        </div>
+        <button class="ghost" id="removeBtn" type="button">Remove</button>
+      </div>
+
+      <div class="controls">
+        <label>
+          Recognition language
+          <select id="language">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="en-AU">English (Australia)</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+            <option value="it-IT">Italian</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+          </select>
+        </label>
+        <button class="primary" id="transcribeBtn" type="button" disabled>Transcribe</button>
+      </div>
+
+      <div class="progress hidden" id="progressWrap" aria-live="polite">
+        <div class="progress-top">
+          <span id="progressLabel">Preparing…</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+      </div>
+
+      <div class="notice" id="notice"></div>
+    </section>
+
+    <section class="card result-card hidden" id="resultCard">
+      <div class="result-head">
+        <div>
+          <p class="eyebrow">RESULT</p>
+          <h2>Transcript</h2>
+        </div>
+        <div class="actions">
+          <button class="ghost" id="copyBtn" type="button">Copy</button>
+          <button class="ghost" id="downloadBtn" type="button">Download TXT</button>
+        </div>
+      </div>
+      <textarea id="transcript" spellcheck="true" aria-label="Transcript"></textarea>
+      <p class="small">Review names, numbers, email addresses, and appointment times before submitting a booking. Browser speech recognition can mishear these details.</p>
+    </section>
+
+    <section class="card integration-card">
+      <p class="eyebrow">INTEGRATION</p>
+      <h2>Use inside ScriptFlow Pro</h2>
+      <p>Load <code>js/smart-opus-transcriber.js</code> and call <code>SmartOpusTranscriber.transcribe(file, options)</code>. No FastAPI endpoint is required.</p>
+    </section>
+  </main>
+  <script src="./js/smart-opus-transcriber.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
